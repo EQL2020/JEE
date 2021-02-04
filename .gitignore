@@ -57,3 +57,10 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+
+/catalina.policy
+/web.xml
+/tomcat-users.xml
+/server.xml
+/context.xml
+/catalina.properties
