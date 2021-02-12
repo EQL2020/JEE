@@ -1,0 +1,38 @@
+package fr.eql.ai108.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.sql.DataSource;
+
+import fr.eql.ai108.jdbc.demo.CatDataSource;
+
+
+public class DaoUser implements IDaoUser {
+	
+	private DataSource ds = new CatDataSource();
+	private static final String REQ_AUTH = "SELECT * FROM user WHERE login = ? AND password = ?";
+	
+	@Override
+	public User authenticate(String login, String password) {
+		Connection cnx = null;
+		User user = null;
+		
+		try {
+			cnx = ds.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(REQ_AUTH);
+			pstmt.setString(1, login);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				user = new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"), rs.getString("name"), rs.getString("surname"));
+			}
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}	
+}
