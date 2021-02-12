@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="fbPremier" type="fr.eql.ai108.struts.actionform.PremierActionForm"/>
+	</form-beans>
+	<action-mappings>
+		<action path="/toto" type="fr.eql.ai108.struts.action.PremierAction" 
+		name="fbPremier" scope="request">
+		<forward name="success" path="/premierStruts.jsp"></forward>
+		</action>
+	</action-mappings>
+</struts-config>
