@@ -18,7 +18,7 @@ public class PremierAppel {
 		//URL de notre bdd avec quelques paramètres
 		String url = "jdbc:mysql://127.0.0.1:3306/cat_db?"
 				+ "serverTimezone=Europe/Paris&verifyServerCertificate=false"
-				+ "&useSSL=false";
+				+ "&useSSL=false&allowPublicKeyRetrieval=true";
 		
 		String driver = "com.mysql.cj.jdbc.Driver";
 		Connection cnx = null;

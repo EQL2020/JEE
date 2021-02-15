@@ -7,6 +7,21 @@
  	<managed-bean-class>fr.eql.ai108.jsf.controller.PremierManagedBean</managed-bean-class>
  	<managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>mbConnect</managed-bean-name>
+ 	<managed-bean-class>fr.eql.ai108.jsf.controller.ConnexionManagedBean</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>mbCat</managed-bean-name>
+ 	<managed-bean-class>fr.eql.ai108.jsf.controller.CatManagedBean</managed-bean-class>
+ 	<managed-bean-scope>request</managed-bean-scope>
+ 	<managed-property>
+ 		<property-name>userConnected</property-name>
+ 		<property-class>fr.eql.ai108.dao.User</property-class>
+ 		<value>#{mbConnect.getUser()}</value>
+ 	</managed-property>
+ </managed-bean>
  <navigation-rule>
  	<from-view-id>/premier.xhtml</from-view-id>
  	<navigation-case>
@@ -20,6 +35,14 @@
  		<from-outcome>tata</from-outcome>
  		<to-view-id>/helloTata.xhtml</to-view-id>
  		<redirect/>
+ 	</navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+ 	<from-view-id>/connexion.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<from-action>#{mbConnect.connect()}</from-action>
+ 		<if>#{mbConnect.user != null}</if>
+ 		<to-view-id>/pageConnectee.xhtml</to-view-id>
  	</navigation-case>
  </navigation-rule>
 </faces-config>

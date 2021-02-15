@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#helloToto.xhtml" PATH="/helloToto.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#helloTata.xhtml" PATH="/helloTata.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#premier.xhtml" PATH="/premier.xhtml"
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#premier.xhtml:0" NAME="item"
@@ -12,8 +16,16 @@
     TARGET="rules:#helloTata.xhtml" TITLE="#{mbPremier.click()}:tata" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#helloToto.xhtml" PATH="/helloToto.xhtml"
-  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#helloTata.xhtml" PATH="/helloTata.xhtml"
-  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#connexion.xhtml" PATH="/connexion.xhtml"
+  SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#connexion.xhtml:0" NAME="item"
+   PATH="/connexion.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID=":#{mbConnect.connect()}:#pageConnectee.xhtml" NAME="output"
+    PATH="/pageConnectee.xhtml" TARGET="rules:#pageConnectee.xhtml"
+    TITLE="#{mbConnect.connect()}:[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pageConnectee.xhtml"
+  PATH="/pageConnectee.xhtml" SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
