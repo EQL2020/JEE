@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+ <application/>
+ <managed-bean>
+ 	<managed-bean-name>mbPremier</managed-bean-name>
+ 	<managed-bean-class>fr.eql.ai108.jsf.controller.PremierManagedBean</managed-bean-class>
+ 	<managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <navigation-rule>
+ 	<from-view-id>/premier.xhtml</from-view-id>
+ 	<navigation-case>
+ 		<from-action>#{mbPremier.click()}</from-action>
+ 		<from-outcome>toto</from-outcome>
+ 		<to-view-id>/helloToto.xhtml</to-view-id>
+ 		<redirect/>
+ 	</navigation-case>
+ 	<navigation-case>
+ 		<from-action>#{mbPremier.click()}</from-action>
+ 		<from-outcome>tata</from-outcome>
+ 		<to-view-id>/helloTata.xhtml</to-view-id>
+ 		<redirect/>
+ 	</navigation-case>
+ </navigation-rule>
+</faces-config>

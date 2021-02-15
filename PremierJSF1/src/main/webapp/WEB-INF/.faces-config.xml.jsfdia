@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#premier.xhtml" PATH="/premier.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#premier.xhtml:0" NAME="item"
+   PATH="/premier.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="toto:#{mbPremier.click()}:#helloToto.xhtml"
+    NAME="output" PATH="/helloToto.xhtml"
+    TARGET="rules:#helloToto.xhtml" TITLE="#{mbPremier.click()}:toto" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tata:#{mbPremier.click()}:#helloTata.xhtml"
+    NAME="output1" PATH="/helloTata.xhtml"
+    TARGET="rules:#helloTata.xhtml" TITLE="#{mbPremier.click()}:tata" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#helloToto.xhtml" PATH="/helloToto.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#helloTata.xhtml" PATH="/helloTata.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
