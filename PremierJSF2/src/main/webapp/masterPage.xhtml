@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<h:outputStylesheet name="CSS/masterStyle.css"/>
+<!-- 	CSS pour les pages enfants -->
+<ui:insert name="CSS"></ui:insert>
+<!-- Titre des pages enfants -->
+<title><ui:insert name="title"></ui:insert></title>
+</h:head> 
+<h:body> 
+	<div id="header">
+		<h1>AI108 Application</h1>
+	</div>
+	<div id="center">
+<!-- 	Je veux que les autres pages s'affichent ici -->
+		<ui:insert name="content"></ui:insert>
+	</div>
+	<div id="footer">
+		<h1>Propriété de l'AI108</h1>
+	</div>
+</h:body> 
+</html>

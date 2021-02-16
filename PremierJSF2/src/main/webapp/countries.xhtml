@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<h:body> 
+	<h:form>
+		<p:panel header="Select a location" style="margin-bottom: 10px">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="country" value="Country: "/>
+				<p:selectOneMenu id="country" value="#{mbCountries.selectedCountry}"
+				style="width: 150px">
+					<p:ajax listener="#{mbCountries.onCountryChange()}" update="city"/>
+					<f:selectItem itemLabel="Select country" itemValue="" noSelectionOption="True"/>
+					<f:selectItems value="#{mbCountries.countries}"/>
+				</p:selectOneMenu>
+				<p:outputLabel for="city" value="City: "/>
+				<p:selectOneMenu id="city" value="#{mbCountries.selectedCity}"
+				style="width: 150px">
+					<f:selectItem itemLabel="Select city" itemValue="" noSelectionOption="True"/>
+					<f:selectItems value="#{mbCountries.cities}"/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body> 
+</html>

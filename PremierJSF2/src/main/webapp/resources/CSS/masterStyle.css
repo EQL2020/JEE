@@ -1,0 +1,14 @@
+#header, #footer{
+	border: 1px solid black;
+	background-image: linear-gradient(90deg, black, red);
+	color: white;
+	text-align: center;
+}
+
+#center{
+	height: 80vh;
+	width: 75vw;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid hotpink;
+}
