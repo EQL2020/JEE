@@ -7,5 +7,6 @@ public interface IDaoCat {
 	List<Cat> findByName(String name);
 	List<Cat> getAll();
 	List<Cat> getCatByUser(User user);
+	void delete(Cat cat);
 
 }

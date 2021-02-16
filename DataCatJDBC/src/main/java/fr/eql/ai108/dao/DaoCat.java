@@ -19,7 +19,8 @@ public class DaoCat implements IDaoCat{
 	private static final String REQ_ADD = "INSERT INTO cat (name, race, birth) VALUES (?,?,?)";
 	private static final String REQ_FIND = "SELECT * FROM cat WHERE name like ?";
 	private static final String REQ_GET_BY_USER = "SELECT * FROM cat WHERE id_user = ?";
-
+	private static final String REQ_DEL = "DELETE FROM cat WHERE cat.id = ?";
+	
 	@Override
 	public void addCat(Cat cat) {
 		Connection cnx = null;
@@ -102,5 +103,21 @@ public class DaoCat implements IDaoCat{
 			e.printStackTrace();
 		}
 		return cats;
+	}
+
+	@Override
+	public void delete(Cat cat) {
+		Connection cnx = null;
+		try {
+			cnx = ds.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(REQ_DEL);
+			pstmt.setInt(1, cat.getId());
+			pstmt.executeUpdate();
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 }

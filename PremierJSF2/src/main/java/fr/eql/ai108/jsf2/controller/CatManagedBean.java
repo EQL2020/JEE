@@ -17,6 +17,12 @@ public class CatManagedBean {
 	private List<Cat> cats;
 	private IDaoCat dao = new DaoCat();
 	
+	public String deleteCat(Cat cat) {
+		System.out.println(cat.toString());
+		dao.delete(cat);
+		return "/displayCat.xhtml?faces-redirect=true";
+	}
+	
 	@PostConstruct
 	public void init() {
 		cats = dao.getAll();
