@@ -7,6 +7,17 @@
 <h:head></h:head> 
 <h:body> 
 	<h1>Page connectée</h1>
-	Bonjour <h:outputLabel value="#{mbConnect.user.name}" />
+	<h:outputLabel value="Yo Tata !!!!" 
+	rendered="#{mbConnect.user.name.equals('Tata')}"/>
+	Bonjour <h:outputLabel value="#{mbConnect.user.name}" /><br/>
+	Utilisateur injecté dans mbCat <h:outputLabel value="#{mbCat.userConnected.name}" />
+	<h1>Chats de l'utilisateur connecté</h1>
+	<ui:repeat var="cat" value="#{mbCat.connectedUsersCats}">
+		<h4>#{cat.name}</h4>
+	</ui:repeat>
+	<h:form>
+		<h:commandLink action="#{mbConnect.disconnect()}" value="Log Out" />
+	</h:form>
+	
 </h:body> 
 </html>

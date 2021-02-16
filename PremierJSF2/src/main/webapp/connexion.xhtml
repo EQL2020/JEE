@@ -1,18 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head> 
-<h:body> 
-	<h:form>
-		Login: <h:inputText id="login" value="#{mbConnect.login}" required="true" 
-		requiredMessage="Le login est obligatoire"/> <h:message style="color:red" for="login"/><br/>
-		Password: <h:inputSecret id="password" value="#{mbConnect.password}" 
-		required="true" requiredMessage="Le password est obligatoire"/>
-		<h:message for="password" style="color:red"/><br/>
+<h:head>
+	<f:metadata>
+		<f:event listener="#{mbConnect.disconnect()}" type="preRenderView"></f:event>
+	</f:metadata>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<h:messages globalOnly="true" />
+		Login: <h:inputText id="login" value="#{mbConnect.login}"
+			required="true" requiredMessage="Le login est obligatoire" />
+		<h:message style="color:red" for="login" />
+		<br />
+		Password: <h:inputSecret id="password" value="#{mbConnect.password}"
+			required="true" requiredMessage="Le password est obligatoire" />
+		<h:message for="password" style="color:red" />
+		<br />
 		<h:commandButton action="#{mbConnect.connect()}" value="Log In" />
+		User en session: <h:outputLabel value="#{mbConnect.user.name}" />
 	</h:form>
-</h:body> 
+</h:body>
 </html>
