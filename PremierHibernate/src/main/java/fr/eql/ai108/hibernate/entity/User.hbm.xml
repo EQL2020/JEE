@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 avr. 2020 10:26:51 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="fr.eql.ai108.hibernate.entity.User" table="user">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="surname" type="java.lang.String">
+            <column name="surname" />
+        </property>
+        <property name="login" type="java.lang.String">
+            <column name="login" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+		<set name="cats" table="cat" cascade="save-update">
+			<key>
+				<column name="id"/>
+			</key>
+			<one-to-many class="fr.eql.ai108.hibernate.entity.Cat"/>
+		</set>
+    </class>
+</hibernate-mapping>
