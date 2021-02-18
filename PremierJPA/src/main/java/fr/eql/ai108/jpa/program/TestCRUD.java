@@ -36,6 +36,9 @@ public class TestCRUD {
 			tata.setSurname("de Toto");
 			em.merge(tata);
 			
+			//Delete un User:
+			em.remove(user);
+			
 			em.getTransaction().commit();
 		}catch (Exception e) {
 			em.getTransaction().rollback();
