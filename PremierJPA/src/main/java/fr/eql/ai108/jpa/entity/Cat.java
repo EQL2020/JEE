@@ -2,7 +2,9 @@ package fr.eql.ai108.jpa.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +36,9 @@ public class Cat implements Serializable{
 	@JoinColumn(referencedColumnName = "id")
 	private User user;
 	
+    @OneToMany (mappedBy = "cat", cascade = CascadeType.ALL)
+    private Set<Toy> toys;
+	
 	public Cat() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,6 +59,17 @@ public class Cat implements Serializable{
 		this.photo = photo;
 		this.birth = birth;
 		this.user = user;
+	}
+	
+	public Cat(Integer id, String name, String race, String photo, Date birth, User user, Set<Toy> toys) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.race = race;
+		this.photo = photo;
+		this.birth = birth;
+		this.user = user;
+		this.toys = toys;
 	}
 	@Override
 	public int hashCode() {
@@ -141,4 +158,10 @@ public class Cat implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public Set<Toy> getToys() {
+		return toys;
+	}
+	public void setToys(Set<Toy> toys) {
+		this.toys = toys;
+	}	
 }

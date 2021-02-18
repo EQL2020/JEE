@@ -1,13 +1,9 @@
 package fr.eql.ai108.jpa.program;
 
-import java.util.Date;
-import java.util.HashSet;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import fr.eql.ai108.jpa.entity.Cat;
 import fr.eql.ai108.jpa.entity.User;
 
