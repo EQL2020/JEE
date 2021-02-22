@@ -33,6 +33,19 @@ public class AccountManagedBean implements Serializable {
 		return "/index.xhtml?faces-redirect=true";
 	}
 	
+	public String connection(){
+		user = proxyAccountBu.connection(user.getLogin(), user.getPassword());
+		String retour = "";
+		if(user != null) {
+			retour = "/connectedView.xhtml?faces-redirect=true";
+		} else {
+			user = new User();
+			message = "Login/Password incorrectes";
+			retour = "/connection.xhtml?faces-redirect=true";
+		}
+		return retour;
+	}
+	
 	public User getUser() {
 		return user;
 	}

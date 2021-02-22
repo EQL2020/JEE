@@ -24,4 +24,10 @@ public class AccountBusiness implements AccountIBusiness {
 		return returnedUser;
 	}
 
+	@Override
+	public User connection(String login, String password) {
+		
+		return proxyUser.authenticate(login, password);
+	}
+
 }

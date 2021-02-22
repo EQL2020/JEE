@@ -26,4 +26,18 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 		return users.size() > 0 ? true : false;
 	}
 
+	@Override
+	public User authenticate(String login, String password) {
+		Query query = em.createQuery("SELECT u FROM User u WHERE "
+				+ "u.login = :paramLogin AND u.password = :paramPassword");
+		User returnedUser = null;
+		query.setParameter("paramLogin", login);
+		query.setParameter("paramPassword", password);
+		List<User> users = query.getResultList();
+		if(users.size() > 0) {
+			returnedUser = users.get(0);
+		}
+		return returnedUser;
+	}
+
 }
