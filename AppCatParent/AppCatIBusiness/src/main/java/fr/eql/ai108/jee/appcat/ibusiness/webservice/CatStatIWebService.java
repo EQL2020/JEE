@@ -9,4 +9,8 @@ public interface CatStatIWebService {
 	@WebMethod (operationName = "getNbUser")
 	@WebResult (name = "nbUser", targetNamespace = "http://ai108.catstat.com")
 	Long getNbUser();
+	
+	@WebMethod (operationName = "getNbCat")
+	@WebResult (name = "nbCat", targetNamespace = "http://ai108.catstat.com")
+	Long getNbCat();
 }

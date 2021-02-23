@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 
 import fr.eql.ai108.jee.appcat.ibusiness.webservice.CatStatIWebService;
+import fr.eql.ai108.jee.appcat.idao.api.CatIDao;
 import fr.eql.ai108.jee.appcat.idao.api.UserIDao;
 
 @WebService (targetNamespace = "http://ai108.catstat.com",
@@ -18,9 +19,18 @@ public class CatStatWebService implements CatStatIWebService {
 	@EJB
 	private UserIDao proxyUserDao;
 	
+	@EJB
+	private CatIDao proxyCatDao;
+	
 	@Override
 	public Long getNbUser() {
 		Long nbUser = proxyUserDao.getNbUser();
 		return nbUser;
+	}
+
+	@Override
+	public Long getNbCat() {
+		Long nbCat = proxyCatDao.getNbCat();
+		return nbCat;
 	}
 }

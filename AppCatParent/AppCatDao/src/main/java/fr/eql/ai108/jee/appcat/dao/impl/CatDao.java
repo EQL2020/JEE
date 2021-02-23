@@ -25,4 +25,11 @@ public class CatDao extends GenericDao<Cat> implements CatIDao {
 		return cats;
 	}
 
+	@Override
+	public Long getNbCat() {
+		Query query = em.createQuery("SELECT COUNT(c) FROM Cat c");
+		Long nbCat = (Long) query.getSingleResult();
+		return nbCat;
+	}
+
 }
