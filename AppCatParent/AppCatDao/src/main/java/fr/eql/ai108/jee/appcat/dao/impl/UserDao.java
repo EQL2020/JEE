@@ -40,4 +40,11 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 		return returnedUser;
 	}
 
+	@Override
+	public Long getNbUser() {
+		Query query = em.createQuery("SELECT COUNT(u) FROM User u");
+		Long nbUser = (Long) query.getSingleResult();
+		return nbUser;
+	}
+
 }
