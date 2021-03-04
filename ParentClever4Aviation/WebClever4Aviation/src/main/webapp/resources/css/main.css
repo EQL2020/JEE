@@ -1,0 +1,22 @@
+body {
+	background: #c4c4c4 -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0)));
+	height: 98vh;	
+}
+.fondPanel{
+    height:99%;   
+}
+.centerFond{
+    background: black;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.ui-widget-content{
+    border: none;
+    background: none;
+}
+.label{
+       color:  #fff;
+       text-shadow: #000000 1px 1px, #000000 -1px 1px, #000000 -1px -1px, #000000 1px -1px;
+       font-size: 2.5vh;
+    }

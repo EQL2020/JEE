@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="content">
+		<h:panelGrid columns="2" cellpadding="10">
+			<p:panel header="Avions" style="height: 80vh;">
+				<h:form>
+					<p:dataTable var="avion" value="#{mbMecano.avions}"
+						filteredValue="#{mbMecano.filteredAvions}" selectionMode="single"
+						selection="#{mbMecano.selectedAvion}" 
+						rowKey="#{avion.id}"
+						tableStyle="table-layout: auto;">
+						<p:ajax event="rowSelect" listener="#{mbMecano.onRowSelect()}"
+							update=":form:defautDetail" />
+						<p:column filterBy="#{avion.immatriculation}"
+							headerText="Immatriculation" filterMatchMode="contains">
+							<h:outputText value="#{avion.immatriculation}" />
+						</p:column>
+						<p:column filterBy="#{avion.typeAvion.modele}" headerText="Modèle"
+							filterMatchMode="contains">
+							<h:outputText value="#{avion.typeAvion.modele}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+			<p:panel header="Compte rendu des défauts" style="height: 80vh">
+				<h:form id="form">
+					<p:dataTable id="defautDetail" var="defaut"
+						value="#{mbMecano.defauts}"
+						scrollable="true" 
+						scrollHeight="500"
+						emptyMessage="Aucun avion sélectionné">
+						<p:column headerText="Date">
+							<h:outputText value="#{defaut.dateCreation}" />
+						</p:column>
+						<p:column headerText="Titre">
+							<h:outputText value="#{defaut.titre}" />
+						</p:column>
+						<p:column headerText="Attention Immédiate">
+							<h:outputText value="#{defaut.attentionImmediate}" />
+						</p:column>
+						<p:column headerText="Modification">
+							<h:outputText value="#{defaut.etatModification}" />
+						</p:column>
+						<p:column headerText="Observation">
+							<h:outputText value="#{defaut.observation}" />
+						</p:column>
+						<p:column headerText="Remarque">
+							<h:outputText value="#{defaut.remarque}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
+</html>

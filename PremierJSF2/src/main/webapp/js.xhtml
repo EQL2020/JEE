@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<h:outputScript library="JS" name="script.js"></h:outputScript>
+</h:head> 
+<h:body> 
+	<h:form id="myForm">
+	a: <input id="a" type="text"/> + b: <input id="b" type="text"/>
+	 <h:inputHidden id="jsValue" value="#{mbJS.valJS}"></h:inputHidden>
+	 = <h:inputText id="result" value="#{mbJS.result}" />
+	 <button onclick="calcul(event)">Result!</button>
+	 <h:commandButton action="#{mbJS.action()}" onclick="setJSValue()" value="Submit" />	
+	</h:form>
+</h:body> 
+</html>

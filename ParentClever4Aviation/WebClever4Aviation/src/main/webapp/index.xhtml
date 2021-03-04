@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:metadata>
+		<f:event listener="#{mbConnexion.deconnexion()}" type="preRenderView"></f:event>
+	</f:metadata>
+	<h:outputStylesheet name="css/main.css" />
+</h:head>
+<h:body>
+	<p:panel id="basic" styleClass="fondPanel">
+		<h:form>
+			<p:graphicImage name="logo.png"
+				style=" display: block; margin-left: auto;
+                                    width: 20vh; border: 1px solid black;  margin-right: auto; margin-top: 5em; margin-bottom: 3em;" />
+			<p:panelGrid columns="1" styleClass="ui-noborder"
+				style=" margin-left: auto; margin-right: auto; text-align: center;">
+				<h:outputText class="label" value="Login:" />
+				<h:inputText value="#{mbConnexion.login}" />
+				<h:outputText class="label" value="Mot de passe:" />
+				<h:inputSecret value="#{mbConnexion.password}" />
+				<h:commandButton value="Connexion"
+					action="#{mbConnexion.connexion()}" />
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

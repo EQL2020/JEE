@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Feuille de style de l'arche -->
+	<!-- Insert du titre de chaque composition -->
+	<title><ui:insert name="title"></ui:insert></title>
+	<!-- Insert de la feuille de style de chaque composition -->
+	<ui:insert name="CSS"></ui:insert>
+</h:head>
+<h:body>
+	<!-- Header -->
+	<h:form>
+		<p:toolbar>
+			<f:facet name="left">
+				<div style="display: flex; align-items: center">
+					<p:graphicImage id="logo" name="logo.png"
+						style="height: 5vh; width: 5vh; margin: 0; padding:0">
+					</p:graphicImage>
+					<p:outputLabel value="Clever4Aviation" />
+				</div>
+
+			</f:facet>
+
+			<f:facet name="right">
+				<p:commandButton value="Deconnexion" style="margin-top: 0.5vh"
+					action="#{mbConnexion.deconnexion()}" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+	<p:tabMenu activeIndex="#{param.i}">
+		<p:menuitem value="Dossiers de Vol" outcome="dossierVol.xhtml"
+			icon="pi pi-star"
+			rendered="#{mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Pilote' || mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Admin'}">
+			<f:param name="i" value="0" />
+		</p:menuitem>
+		<p:menuitem value="Consignes Sureté Sol" outcome="securiteSol.xhtml"
+			icon="pi pi-search"
+			rendered="#{mbConnexion.utilisateur.typeUtilisateur.autorisation == 'PSS' || mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Admin'}">
+			<f:param name="i" value="1" />
+		</p:menuitem>
+		<p:menuitem value="Consignes Sureté Vol" outcome="securiteVol.xhtml"
+			icon="pi pi-file"
+			rendered="#{mbConnexion.utilisateur.typeUtilisateur.autorisation == 'PSV' || mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Admin'}">
+			<f:param name="i" value="2" />
+		</p:menuitem>
+		<p:menuitem value="Défauts" outcome="defaut.xhtml"
+			icon="pi pi-briefcase"
+			rendered="#{mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Mecano' || mbConnexion.utilisateur.typeUtilisateur.autorisation == 'Admin'}">
+			<f:param name="i" value="3" />
+		</p:menuitem>
+	</p:tabMenu>
+	<div
+		style="border: 1px solid #a8a8a8; border-radius: 3px; height: 85vh">
+		<ui:insert name="content"></ui:insert>
+	</div>
+</h:body>
+</html>

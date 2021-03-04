@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="content">
+		<p:tabView style="height: 84vh" id="tabContainer"
+			activeIndex="#{mbMecano.activeTabIndex}" widgetVar="tab">
+			<p:tab title="Ajouter défaut">
+				<p:panel align="center" header="Nouveau défaut"
+					style="width: 100vh; margin: 0 auto; margin-top:5vh ; padding : 0">
+					<h:form id="ajoutForm">
+						<p:panelGrid columns="4" columnClasses="ui-md-6"
+							styleClass="ui-noborder"
+							style=" width: 50vh; margin: auto; margin-top: 3vh">
+							<p:outputLabel>Référence: </p:outputLabel>
+							<p:outputLabel value="#{mbMecano.referenceNouveauDefaut}">
+								<f:convertNumber type="number" maxIntegerDigits="6"
+									minIntegerDigits="6" />
+							</p:outputLabel>
+							<p:outputLabel>Date de création: </p:outputLabel>
+							<h:outputText value="#{session.lastAccessedTime}">
+								<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+							</h:outputText>
+							<p:outputLabel>Immatriculation avion: </p:outputLabel>
+							<p:inputText style="width: 190px"
+								value="#{mbMecano.immatriculationAvionDefautAjout}" />
+							<p:outputLabel>Titre défaut: </p:outputLabel>
+							<p:inputText style="width: 190px"
+								value="#{mbMecano.nouveauDefaut.titre}" />
+
+							<p:outputLabel>Attention immédiate: </p:outputLabel>
+							<p:inputTextarea
+								value="#{mbMecano.nouveauDefaut.attentionImmediate}" />
+							<p:outputLabel>Observation: </p:outputLabel>
+							<p:inputTextarea value="#{mbMecano.nouveauDefaut.observation}" />
+							<p:outputLabel>Etat de modification: </p:outputLabel>
+							<p:inputTextarea
+								value="#{mbMecano.nouveauDefaut.etatModification}" />
+							<p:outputLabel>Remarques: </p:outputLabel>
+							<p:inputTextarea value="#{mbMecano.nouveauDefaut.remarque}" />
+						</p:panelGrid>
+
+						<p:commandButton value="Ajouter défaut"
+							style="display:block; margin: auto; margin-top: 3vh; margin-bottom: 2vh"
+							action="#{mbMecano.ajouterDefaut()}" update="@form" />
+						<h:messages fatalStyle="true" style="color:red" />
+					</h:form>
+				</p:panel>
+			</p:tab>
+			<p:tab title="Consulter défaut" id="tab2">
+
+				<h:panelGrid columns="2" cellpadding="10" id="mainGrid">
+					<h:form id="consultForm">
+						<p:outputLabel>Immatriculation: </p:outputLabel>
+						<p:inputText value="#{mbMecano.immatriculation}"
+							style="margin-right: 3vh" />
+						<p:commandButton value="rechercher"
+							action="#{mbMecano.afficherDefautParAvion()}"
+							update="defautTable" />
+						<br />
+						<br />
+						<p:dataTable id="defautTable" var="defaut"
+							value="#{mbMecano.defauts}" paginator="true" rows="4"
+							paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
+							emptyMessage="Aucun avion sélectionné">
+							<f:facet name="{Exporters}">
+								<div style="float: right; padding-top: 5px;">
+									<h:commandLink>
+										<p:graphicImage name="iconPDF.png" style="width: 50%" />
+										<pe:exporter type="pdf" target="defautTable"
+											 fileName="defaut" pageOnly="true" tableTitle="Defaut" 
+											 orientation="Landscape" facetBackground="#8400ff" facetFontSize="10"
+											facetFontColor="#ffffff" facetFontStyle="BOLD"
+											cellFontColor="#0f0f0f" cellFontSize="10"
+											cellFontStyle="NORMAL" encoding="CP1252" fontName="Arial Unicode MS"/>
+									</h:commandLink>
+								</div>
+							</f:facet>
+							<p:column headerText="Date" filterBy="#{defaut.dateCreation}">
+								<h:outputText value="#{defaut.dateCreation}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Référence" filterBy="#{defaut.reference}">
+								<h:outputText value="#{defaut.reference}">
+									<f:convertNumber type="number" maxIntegerDigits="6"
+										minIntegerDigits="6" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Titre" filterBy="#{defaut.titre}">
+								<h:outputText value="#{defaut.titre}" />
+							</p:column>
+							<p:column headerText="Attention Immédiate"
+								filterBy="#{defaut.attentionImmediate}">
+								<h:outputText value="#{defaut.attentionImmediate}" />
+							</p:column>
+							<p:column headerText="Modification"
+								filterBy="#{defaut.etatModification}">
+								<h:outputText value="#{defaut.etatModification}" />
+							</p:column>
+							<p:column headerText="Observation"
+								filterBy="#{defaut.observation}">
+								<h:outputText value="#{defaut.observation}" />
+							</p:column>
+							<p:column headerText="Remarque" filterBy="#{defaut.remarque}">
+								<h:outputText value="#{defaut.remarque}" />
+							</p:column>
+							<p:column style="text-align: center;" exportable="false">
+								<p:commandButton update=":popForm:histoDetail"
+									oncomplete="PF('histoDialog').show()" icon="fa fa-history"
+									style="margin: 0.5vh"
+									action="#{mbMecano.afficherHistoriqueParDefaut()}">
+									<f:setPropertyActionListener value="#{defaut}"
+										target="#{mbMecano.selectedDefaut}" />
+								</p:commandButton>
+								<p:commandButton update=":modifForm:defautDetail"
+									oncomplete="PF('defautDialog').show()" icon="fa fa-edit"
+									style="margin: 0.5vh">
+									<f:setPropertyActionListener value="#{defaut}"
+										target="#{mbMecano.selectedDefaut}" />
+								</p:commandButton>
+								<p:commandButton update=":deleteForm:deletePanel"
+									oncomplete="PF('deleteDialog').show()" icon="fa fa-eraser"
+									style="margin: 0.5vh">
+									<f:setPropertyActionListener value="#{defaut}"
+										target="#{mbMecano.selectedDefaut}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
+		<p:dialog header="Historique du défaut" widgetVar="histoDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			draggable="false">
+			<h:form id="popForm">
+				<p:outputPanel id="histoDetail"
+					style="text-align:center; width:60vh">
+					<p:dataTable var="historique" value="#{mbMecano.historiques}">
+						<p:column headerText="Version">
+							<h:outputText value="#{historique.numVersion}" />
+						</p:column>
+						<p:column headerText="Action">
+							<h:outputText value="#{historique.derniereAction}" />
+						</p:column>
+						<p:column headerText="Modifiée par">
+							<h:outputText value="#{historique.utilisateur.login}" />
+						</p:column>
+						<p:column headerText="Date">
+							<h:outputText value="#{historique.dateModif}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+		<p:dialog header="Modifier le défaut" widgetVar="defautDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			draggable="false">
+			<h:form id="modifForm">
+				<p:panelGrid id="defautDetail" columns="2" styleClass="ui-noborder">
+					<p:outputLabel>Référence: </p:outputLabel>
+					<p:outputLabel value="#{mbMecano.selectedDefaut.reference}">
+						<f:convertNumber type="number" maxIntegerDigits="6"
+							minIntegerDigits="6" />
+					</p:outputLabel>
+					<p:outputLabel>Immatriculation: </p:outputLabel>
+					<p:outputLabel
+						value="#{mbMecano.selectedDefaut.avion.immatriculation}" />
+					<p:outputLabel>Type avion: </p:outputLabel>
+					<p:outputLabel
+						value="#{mbMecano.selectedDefaut.avion.typeAvion.modele}" />
+					<p:outputLabel>Date de création: </p:outputLabel>
+					<h:outputText value="#{session.lastAccessedTime}">
+						<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+					</h:outputText>
+					<p:outputLabel>Attention immédiate: </p:outputLabel>
+					<p:inputTextarea
+						value="#{mbMecano.selectedDefaut.attentionImmediate}" />
+					<p:outputLabel>Observation: </p:outputLabel>
+					<p:inputTextarea value="#{mbMecano.selectedDefaut.observation}" />
+					<p:outputLabel>Etat de modification: </p:outputLabel>
+					<p:inputTextarea
+						value="#{mbMecano.selectedDefaut.etatModification}" />
+					<p:outputLabel>Remarques: </p:outputLabel>
+					<p:inputTextarea value="#{mbMecano.selectedDefaut.remarque}" />
+					<p:commandButton value="Mettre à jour"
+						action="#{mbMecano.majDefaut()}" update="@widgetVar(tab)"
+						oncomplete="PF('defautDialog').hide()"
+						style="display: float; float:right" />
+					<p:commandButton value="Annuler"
+						oncomplete="PF('defautDialog').hide()"
+						style="display: float; float:right" />
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		<p:dialog header="Supprimer le défaut" widgetVar="deleteDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			draggable="false">
+			<h:form id="deleteForm">
+				<p:outputPanel id="deletePanel">
+					<p:outputLabel>Confirmer la suppresion du défaut référence :</p:outputLabel>
+					<p:outputLabel value="#{mbMecano.selectedDefaut.reference}">
+						<f:convertNumber type="number" maxIntegerDigits="6"
+							minIntegerDigits="6" />
+					</p:outputLabel> ?
+					<br />
+					<p:commandButton value="Annuler"
+						oncomplete="PF('deleteDialog').hide()"
+						style="display: float; float:right;margin:0.5vh" />
+					<p:commandButton value="Confirmer"
+						action="#{mbMecano.effacerDefaut()}" update="@widgetVar(tab)"
+						oncomplete="PF('deleteDialog').hide()"
+						style="display: float; float:right; margin: 0.5vh" />
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="content">
+		<h:form id="form">
+			<p:panelGrid columns="2" layout="grid">
+				<p:dataTable id="volDT" var="vol" value="#{mbDossierVol.vols}"
+					selectionMode="single" selection="#{mbDossierVol.selectedVol}"
+					rowKey="#{vol.id}">
+					<f:facet name="header">
+            Prochains Vols
+        </f:facet>
+					<p:ajax event="rowSelect" listener="#{mbDossierVol.onRowSelect()}"
+						update=":form:dossierVolPanel" />
+
+					<p:column headerText="Numéro de vol">
+						<h:outputText value="#{vol.numero}" />
+					</p:column>
+					<p:column headerText="Départ">
+						<h:outputText value="#{vol.aeroportDepart.nom}" />
+					</p:column>
+					<p:column headerText="Arrivée">
+						<h:outputText value="#{vol.aeroportArrivee.nom}" />
+					</p:column>
+					<p:column headerText="Date">
+						<h:outputText value="#{vol.dateVol}">
+							<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="dossierVolPanel" header="Dossier de Vol">
+					<p:scrollPanel mode="native"
+						style="width:45vw;height:65vh; padding: 1vh" id="dv">
+						<h3>Consignes de sureté</h3>
+						<p:dataTable id="consigneTable" var="consigne"
+							value="#{mbDossierVol.consigneSuretes}" paginator="true" rows="1"
+							paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
+							emptyMessage="Aucun vol sélectionné">
+							<p:column headerText="Reference" filterBy="#{consigne.reference}"
+								style="width: 10vh;">
+								<h:outputText value="#{consigne.reference}">
+									<f:convertNumber type="number" maxIntegerDigits="6"
+										minIntegerDigits="6" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Titre" filterBy="#{consigne.titre}"
+								style="width: 12vh;">
+								<h:outputText value="#{consigne.titre}" />
+							</p:column>
+
+							<p:column headerText="Code" filterBy="#{consigne.code}"
+								style="width: 5vh;">
+								<h:outputText value="#{consigne.code}" />
+							</p:column>
+							<p:column headerText="Corps du message"
+								filterBy="#{consigne.corpsMessage}">
+								<h:outputText value="#{consigne.corpsMessage}" />
+							</p:column>
+							<p:column headerText="Remarque" filterBy="#{consigne.remarque}">
+								<h:outputText value="#{consigne.remarque}" />
+							</p:column>
+						</p:dataTable>
+						<h3>Défauts</h3>
+						<p:dataTable id="defautTable" var="defaut"
+							value="#{mbDossierVol.defauts}" paginator="true" rows="1"
+							paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
+							emptyMessage="Aucun défaut">
+
+							<p:column headerText="Reference" filterBy="#{defaut.reference}">
+								<h:outputText value="#{defaut.reference}">
+									<f:convertNumber type="number" maxIntegerDigits="6"
+										minIntegerDigits="6" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Titre" filterBy="#{defaut.titre}">
+								<h:outputText value="#{defaut.titre}" />
+							</p:column>
+							<p:column headerText="Attention Immédiate"
+								filterBy="#{defaut.attentionImmediate}">
+								<h:outputText value="#{defaut.attentionImmediate}" />
+							</p:column>
+							<p:column headerText="Modification"
+								filterBy="#{defaut.etatModification}">
+								<h:outputText value="#{defaut.etatModification}" />
+							</p:column>
+							<p:column headerText="Observation"
+								filterBy="#{defaut.observation}">
+								<h:outputText value="#{defaut.observation}" />
+							</p:column>
+							<p:column headerText="Remarque" filterBy="#{defaut.remarque}">
+								<h:outputText value="#{defaut.remarque}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:scrollPanel>
+				</p:panel>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
